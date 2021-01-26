@@ -2,19 +2,33 @@ import * as React from 'react';
 import { Formik, Form, Field } from 'formik';
 import { Button, LinearProgress,Grid} from '@material-ui/core';
 import { TextField } from 'formik-material-ui';
+import DataFetch from './dataFetch';
+import axios from 'axios';
 
 
 interface Values {
-  title: string;
-  body: string;
+  fname: string;
+  lname: string;
+  phone: string;
+  email: string;
+  address: string;
+  city: string;
+  state: string;
 }
+
 
 function App() {
   return (
+  	<div>
   	<Formik
       initialValues={{
-        title: '',
-        body: '',
+        fname: '',
+        lname: '',
+        phone: '',
+        email: '',
+        address: '',
+        city: '',
+        state: '',
       }}
       
       onSubmit={(values, { setSubmitting }) => {
@@ -22,39 +36,76 @@ function App() {
           setSubmitting(false);
 
           //post
-          fetch('https://jsonplaceholder.typicode.com/posts', {
-		  method: 'POST',
-		  body: JSON.stringify({
-		    title: values.title,
-		    body: values.body,
-		    userId: 1,
-		  }),
-		  headers: {
-		    'Content-type': 'application/json; charset=UTF-8',
-		  },
-		})
-		  .then((response) => response.json())
-		  .then((json) => console.log(json));
+         axios.post('http://slimreactjs.iworkone.com/slim/api/users/add', {
+         	//must match with db field names - first_name
+		    first_name: values.fname,
+		    last_name: values.lname,
+		    phone: values.phone,
+		    email: values.email,
+		    address: values.address,
+		    city: values.city,
+		    state: values.state
+		  })
+		  .then(function (response) {
+		    console.log(response);
+		  })
+
+
 
         }, 500);
       }}
     >
       {({ submitForm, isSubmitting }) => (
-      	<Grid container justify="center" style={{marginTop: '100px'}}>
+      	<Grid container justify="center" style={{marginTop: '60px'}}>
       		<Grid item xs={6}>
       			<Form>
 		          <Field
 		            component={TextField}
 		            type="text"
-		            label="Title"
-		            name="title"
+		            label="Full Name"
+		            name="fname"
 		          />
 		          <br />
 		          <Field
 		            component={TextField}
 		            type="text"
-		            label="Body"
-		            name="body"
+		            label="Last Name"
+		            name="lname"
+		          />
+		          <br />
+		          <Field
+		            component={TextField}
+		            type="text"
+		            label="Phone"
+		            name="phone"
+		          />
+		          <br />
+		          <Field
+		            component={TextField}
+		            type="text"
+		            label="Email"
+		            name="email"
+		          />
+		          <br />
+		          <Field
+		            component={TextField}
+		            type="text"
+		            label="Address"
+		            name="address"
+		          />
+		          <br />
+		          <Field
+		            component={TextField}
+		            type="text"
+		            label="City"
+		            name="city"
+		          />
+		          <br />
+		          <Field
+		            component={TextField}
+		            type="text"
+		            label="State"
+		            name="state"
 		          />
 		          {isSubmitting && <LinearProgress />}
 		          <br />
@@ -67,11 +118,13 @@ function App() {
 		          >
 		            Submit
 		          </Button>
+		          <DataFetch />
 		        </Form>
       		</Grid>
       	</Grid>
       )}
     </Formik>
+    </div>
   ) ;
 }
 
