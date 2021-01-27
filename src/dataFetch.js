@@ -10,7 +10,7 @@ export default function DataFetch(){
 	const [confirmDialog, setConfirmDialog] = useState({isOpen: false, title: '', subtitle: ''});
 
 	useEffect(() => {
-		axios.get('slim/api/users')
+		axios.get('/slim/api/users')
 		.then(res =>{
 			setPosts(res.data);
 		})
@@ -24,7 +24,7 @@ export default function DataFetch(){
 			...confirmDialog,
 			isOpen: false
 		})
-		axios.delete(`slim/api/users/delete/${id}`)
+		axios.delete(`/slim/api/users/delete/${id}`)
 		  .then(function (response) {
 		    setNotify({
 		    	isOpen: true,
@@ -61,7 +61,7 @@ export default function DataFetch(){
 			subTitle: 'You cannot undo this operation',
 			onConfirm: () => { handleDelete(post.id, post.first_name) }
 		})
-		 }}>Delete</Button></li>
+		 }}>Delete</Button> &nbsp; <Button variant="contained" color="primary" onClick={() => { handleUpdate(post.id) }}>Update</Button> </li>
 							</div>
 						))
 					}
