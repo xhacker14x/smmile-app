@@ -61,7 +61,7 @@ export default function DataFetch(){
 			subTitle: 'You cannot undo this operation',
 			onConfirm: () => { handleDelete(post.id, post.first_name) }
 		})
-		 }}>Delete</Button> &nbsp; <Button variant="contained" color="primary" onClick={() => { handleUpdate(post.id) }}>Update</Button> </li>
+		 }}>Delete</Button> &nbsp;</li>
 							</div>
 						))
 					}
