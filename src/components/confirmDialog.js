@@ -20,6 +20,7 @@ export default function ConfirmDialog(props){
 			</DialogContent>
 			<DialogActions>
 				<Button variant="contained" color="default" onClick={() => setConfirmDialog({...confirmDialog, isOpen: false})}>No</Button>
+				<Button variant="contained" color="primary" onClick={confirmDialog.onConfirm}>Yes</Button>
 			</DialogActions>
 		</Dialog>
 	)
