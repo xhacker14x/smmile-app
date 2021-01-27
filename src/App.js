@@ -36,7 +36,7 @@ function App() {
           setSubmitting(false);
 
           //post
-         axios.post('http://slimreactjs.iworkone.com/slim/api/users/add', {
+         axios.post('slim/api/users/add', {
          	//must match with db field names - first_name
 		    first_name: values.fname,
 		    last_name: values.lname,
@@ -49,9 +49,6 @@ function App() {
 		  .then(function (response) {
 		    console.log(response);
 		  })
-
-
-
         }, 500);
       }}
     >
