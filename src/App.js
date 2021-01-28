@@ -14,6 +14,7 @@ import Popup from "./components/Popup";
 import Notification from "./components/Notification";
 import ConfirmDialog from "./components/confirmDialog";
 
+
 interface Values {
   fname: string;
   lname: string;
@@ -23,6 +24,7 @@ interface Values {
   city: string;
   state: string;
 }
+
 
 //styles
 const useStyles = makeStyles((theme) => ({
@@ -53,7 +55,7 @@ function App() {
   //fetch data
   useEffect(() => {
     axios
-      .get("/slim/api/users")
+      .get("http://slimreactjs.iworkone.com/slim/api/users")
       .then((res) => {
         setPosts(res.data);
       })
@@ -69,7 +71,7 @@ function App() {
       isOpen: false,
     });
     axios
-      .delete(`/slim/api/users/delete/${id}`)
+      .delete(`http://slimreactjs.iworkone.com/slim/api/users/delete/${id}`)
       .then(function (response) {
         setNotify({
           isOpen: true,
@@ -125,7 +127,7 @@ function App() {
             //add new item
             if (action == "addItem") {
               axios
-                .post("/slim/api/users/add", {
+                .post("http://slimreactjs.iworkone.com/slim/api/users/add", {
                   //must match with db field names - first_name
                   first_name: values.fname,
                   last_name: values.lname,
@@ -147,7 +149,7 @@ function App() {
             //update item
             if (action == "updateItem") {
               axios
-                .put(`/slim/api/users/update/${values.id}`, {
+                .put(`http://slimreactjs.iworkone.com/slim/api/users/update/${values.id}`, {
                   //must match with db field names - first_name
                   first_name: values.fname,
                   last_name: values.lname,
